@@ -67,14 +67,15 @@ export default function TechStackSection() {
       
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Tag */}
-        <div className="relative inline-flex mb-8 bg-white">
-          <div className="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2 border-black"></div>
-          <div className="border-[1.5px] border-black px-4 py-1.5 bg-[#E6F4F1]">
-            <span className="text-black font-semibold tracking-wide text-sm">Tech Stack</span>
+        <div className="relative inline-flex mb-8 bg-white ml-1.5 mt-1.5">
+          <div className="absolute -top-1.5 -left-1.5 w-2 h-2 border-t-[2px] border-l-[2px] border-[#0F1A37]"></div>
+          <div className="absolute top-0 left-0 w-2 h-2 border-t-[3px] border-l-[3px] border-[#0F1A37]"></div>
+          <div className="border-[1.5px] border-[#0F1A37] px-4 py-1.5 bg-[#E2F6FF]">
+            <span className="text-black font-semibold tracking-wide text-[20px]">Tech Stack</span>
           </div>
         </div>
 
-        <h2 className="text-4xl md:text-5xl font-bold text-black mb-12 tracking-tight">
+        <h2 className="text-[35px] font-bold text-black mb-12 tracking-tight">
           Tools Behind the Process
         </h2>
 
@@ -89,8 +90,8 @@ export default function TechStackSection() {
                 {tool.icon}
               </div>
               <div className="flex flex-col">
-                <h3 className="text-xl font-bold text-black">{tool.name}</h3>
-                <p className="text-black/70 text-sm font-medium mt-0.5">{tool.description}</p>
+                <h3 className="text-[20px] font-bold text-black">{tool.name}</h3>
+                <p className="text-black/70 text-[16px] font-medium mt-0.5">{tool.description}</p>
               </div>
             </div>
           ))}
