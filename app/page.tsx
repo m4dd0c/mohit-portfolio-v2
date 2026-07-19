@@ -7,13 +7,21 @@ import FooterSection from "./FooterSection";
 export default function Home() {
   return (
     <main className="min-h-screen bg-white flex flex-col items-center justify-center">
-      <HeroSection />
+      <div id="about" className="w-full">
+        <HeroSection />
+      </div>
       <div className="w-full pt-10">
-        <SkillsSection />
-        <FeaturedWorkSection />
+        <div id="skills">
+          <SkillsSection />
+        </div>
+        <div id="projects">
+          <FeaturedWorkSection />
+        </div>
         <TechStackSection />
       </div>
-      <FooterSection />
+      <div id="contact" className="w-full">
+        <FooterSection />
+      </div>
     </main>
   );
 }

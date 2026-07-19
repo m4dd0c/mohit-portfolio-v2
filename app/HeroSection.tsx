@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaLinkedin } from "react-icons/fa";
 import { FiArrowUpRight } from "react-icons/fi";
 
@@ -66,6 +68,64 @@ export function LiquidGlassBadge({ children, className = "" }: { children: React
 }
 
 export default function HeroSection() {
+  const dot1Ref = useRef<HTMLDivElement>(null);
+  const dot2Ref = useRef<HTMLDivElement>(null);
+  const dot3Ref = useRef<HTMLDivElement>(null);
+  const mouseXRef = useRef(0);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      // mouseXRef.current = (e.clientX / window.innerWidth) * 2 - 1;
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+
+    let startTime: number | null = null;
+    let rafId: number;
+
+    const updateDot = (
+      ref: React.RefObject<HTMLDivElement | null>,
+      baseAngleDeg: number,
+      radius: number,
+      period: number,
+      delay: number,
+      mousePx: number,
+      t: number,
+      mx: number
+    ) => {
+      if (!ref.current) return;
+      const baseAngle = (baseAngleDeg * Math.PI) / 180;
+      // 10px arc oscillation → convert to angle delta
+      const boomerangAngle =
+        (10 / radius) * Math.sin(((t - delay) * 2 * Math.PI) / period);
+      // Mouse parallax → convert px to angle delta
+      const mouseAngle = (mousePx / radius) * mx;
+      const finalAngle = baseAngle + boomerangAngle + mouseAngle;
+      // Position on circle border (angle from 12 o'clock, clockwise)
+      const left = 50 + 50 * Math.sin(finalAngle);
+      const top = 50 - 50 * Math.cos(finalAngle);
+      ref.current.style.left = `${left}%`;
+      ref.current.style.top = `${top}%`;
+    };
+
+    const animate = (timestamp: number) => {
+      if (startTime === null) startTime = timestamp;
+      const t = (timestamp - startTime) / 1000;
+      const mx = mouseXRef.current;
+      //                     baseAngle  radius  period  delay  mousePx
+      // updateDot(dot1Ref,     60,        190,    3,      0,     15, t, mx);
+      // updateDot(dot2Ref,     42,        230,    3.5,    1,     20, t, mx);
+      // updateDot(dot3Ref,     315,       270,    4,      0.5,   12, t, mx);
+      rafId = requestAnimationFrame(animate);
+    };
+
+    rafId = requestAnimationFrame(animate);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
   return (
     <section
       className="relative w-full min-h-[50vh] overflow-hidden font-sans flex flex-col"
@@ -110,18 +170,14 @@ export default function HeroSection() {
         <div className="flex-1 relative w-full flex justify-center items-center mt-12 md:mt-0">
           {/* Concentric Circles with Dots and Badges */}
           <div className="absolute inset-0 -bottom-38 flex items-center justify-center pointer-events-none z-0">
-            {/* Inner Circle */}
+            {/* Inner Circle (380px, r=190) */}
             <div className="w-[380px] h-[380px] rounded-full border border-white/40 absolute">
-              {/* Product Designer Dot & Badge */}
               <div
+                ref={dot1Ref}
                 className="absolute pointer-events-auto"
-                style={{
-                  top: "25%",
-                  left: "116.7%",
-                  transform: "translate(-50%, -50%)",
-                }}
+                style={{ top: "25%", left: "117%", transform: "translate(-50%, -50%)" }}
               >
-                <LiquidGlassBadge className="absolute bottom-full -translate-x-1/2 mb-3">
+                <LiquidGlassBadge className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3">
                   Product Designer
                 </LiquidGlassBadge>
                 <div className="relative w-2.5 h-2.5 rounded-full bg-white">
@@ -130,18 +186,14 @@ export default function HeroSection() {
               </div>
             </div>
 
-            {/* Middle Circle */}
+            {/* Middle Circle (460px, r=230) */}
             <div className="w-[460px] h-[460px] rounded-full border border-white/40 absolute">
-              {/* Video Editor Dot & Badge */}
               <div
+                ref={dot2Ref}
                 className="absolute pointer-events-auto"
-                style={{
-                  top: "0%",
-                  left: "86.5%",
-                  transform: "translate(-50%, -50%)",
-                }}
+                style={{ top: "0", left: "39.5%", transform: "translate(-50%, -50%)" }}
               >
-                <LiquidGlassBadge className="absolute bottom-full -translate-x-1/2 mb-3">
+                <LiquidGlassBadge className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3">
                   Video Editor
                 </LiquidGlassBadge>
                 <div className="relative w-2.5 h-2.5 rounded-full bg-white">
@@ -150,18 +202,14 @@ export default function HeroSection() {
               </div>
             </div>
 
-            {/* Outer Circle */}
+            {/* Outer Circle (540px, r=270) */}
             <div className="w-[540px] h-[540px] rounded-full border border-white/40 absolute">
-              {/* UI/UX Designer Dot & Badge */}
               <div
+                ref={dot3Ref}
                 className="absolute pointer-events-auto"
-                style={{
-                  top: "25%",
-                  left: "16.5%",
-                  transform: "translate(-50%, -50%)",
-                }}
+                style={{ top: "30%", left: "15%", transform: "translate(-50%, -50%)" }}
               >
-                <LiquidGlassBadge className="absolute bottom-full -translate-x-1/2 mb-3">
+                <LiquidGlassBadge className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3">
                   UI/UX Designer
                 </LiquidGlassBadge>
                 <div className="relative w-2.5 h-2.5 rounded-full bg-white">
@@ -189,11 +237,21 @@ export default function HeroSection() {
 }
 
 export const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const scrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
+  };
+
   return (
     <nav className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl px-6 py-4 flex items-center justify-between mt-4 z-50">
       {/* Logo */}
       <div
-        className="px-6 py-3 rounded-md shadow-lg backdrop-blur-sm flex-1 flex justify-between items-center"
+        className="px-6 py-3 rounded-md shadow-lg backdrop-blur-sm flex-1 flex justify-between items-center relative"
         style={{ backgroundColor: "rgba(13, 32, 42, 0.5)" }}
       >
         <div className="text-white font-black text-2xl tracking-wider flex items-center">
@@ -210,20 +268,62 @@ export const Navbar = () => {
           </span>
         </div>
 
+        {/* Mobile menu button */}
+        <button 
+          className="md:hidden text-white p-1"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {isMenuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
+
+        {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-8 text-gray-300 text-[18px] font-medium">
-          <li className="hover:text-white cursor-pointer transition-colors">
+          <li onClick={() => scrollToSection('about')} className="hover:text-white cursor-pointer transition-colors">
             About me
           </li>
-          <li className="hover:text-white cursor-pointer transition-colors">
+          <li onClick={() => scrollToSection('projects')} className="hover:text-white cursor-pointer transition-colors">
             Project
           </li>
-          <li className="hover:text-white cursor-pointer transition-colors">
-            Resume
+          <li onClick={() => scrollToSection('skills')} className="hover:text-white cursor-pointer transition-colors">
+            Skills
           </li>
           <li className="hover:text-white cursor-pointer transition-colors">
+            <a href="https://drive.google.com/file/d/1DBRlRUcCKhm_tk4NycV995AzEZKjl1dB/view" target="_blank" rel="noopener noreferrer">
+              Resume
+            </a>
+          </li>
+          <li onClick={() => scrollToSection('contact')} className="hover:text-white cursor-pointer transition-colors">
             Contact
           </li>
         </ul>
+
+        {/* Mobile Menu Dropdown */}
+        {isMenuOpen && (
+          <div className="absolute top-full left-0 right-0 mt-2 p-4 rounded-md shadow-lg backdrop-blur-md md:hidden flex flex-col gap-4 border border-white/10"
+               style={{ backgroundColor: "rgba(13, 32, 42, 0.95)" }}>
+            <div onClick={() => scrollToSection('about')} className="text-gray-300 hover:text-white cursor-pointer transition-colors font-medium text-lg">
+              About me
+            </div>
+            <div onClick={() => scrollToSection('projects')} className="text-gray-300 hover:text-white cursor-pointer transition-colors font-medium text-lg">
+              Project
+            </div>
+            <div onClick={() => scrollToSection('skills')} className="text-gray-300 hover:text-white cursor-pointer transition-colors font-medium text-lg">
+              Skills
+            </div>
+            <a href="https://drive.google.com/file/d/1DBRlRUcCKhm_tk4NycV995AzEZKjl1dB/view" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white cursor-pointer transition-colors font-medium text-lg">
+              Resume
+            </a>
+            <div onClick={() => scrollToSection('contact')} className="text-gray-300 hover:text-white cursor-pointer transition-colors font-medium text-lg">
+              Contact
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );

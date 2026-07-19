@@ -27,7 +27,7 @@ export default function SkillsSection() {
     <section className="max-w-7xl mx-auto px-6 py-20 w-full font-sans bg-white">
       <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
         {/* Left Column */}
-        <div className="flex-1 flex flex-col justify-start sticky top-32 h-fit">
+        <div className="flex-1 flex flex-col justify-start lg:sticky lg:top-32 h-fit">
           {/* Badge */}
           <div className="relative inline-flex w-fit mb-8 ml-1.5 mt-1.5">
             {/* Outer corner accent */}
@@ -49,26 +49,26 @@ export default function SkillsSection() {
           
           {/* Tools Row */}
           <div className="flex w-fit border-[1.5px] border-black bg-white shadow-sm">
-            <div className="w-16 h-14 sm:w-20 sm:h-15 flex items-center justify-center border-r-[1.5px] border-black hover:bg-gray-50 transition-colors">
-              <RiOpenaiFill className="text-2xl sm:text-3xl text-black" />
+            <div className="w-[42px] h-[42px] sm:w-16 sm:h-14 md:w-20 md:h-[60px] flex items-center justify-center border-r-[1.5px] border-black hover:bg-gray-50 transition-colors">
+              <RiOpenaiFill className="text-xl sm:text-2xl md:text-3xl text-black" />
             </div>
-            <div className="w-16 h-14 sm:w-20 sm:h-15 flex items-center justify-center border-r-[1.5px] border-black hover:bg-gray-50 transition-colors">
-              <SiFigma className="text-2xl sm:text-3xl text-black" />
+            <div className="w-[42px] h-[42px] sm:w-16 sm:h-14 md:w-20 md:h-[60px] flex items-center justify-center border-r-[1.5px] border-black hover:bg-gray-50 transition-colors">
+              <SiFigma className="text-xl sm:text-2xl md:text-3xl text-black" />
             </div>
-            <div className="w-16 h-14 sm:w-20 sm:h-15 flex items-center justify-center border-r-[1.5px] border-black hover:bg-gray-50 transition-colors">
-              <SiFramer className="text-2xl sm:text-3xl text-black" />
+            <div className="w-[42px] h-[42px] sm:w-16 sm:h-14 md:w-20 md:h-[60px] flex items-center justify-center border-r-[1.5px] border-black hover:bg-gray-50 transition-colors">
+              <SiFramer className="text-xl sm:text-2xl md:text-3xl text-black" />
             </div>
-            <div className="w-16 h-14 sm:w-20 sm:h-15 flex items-center justify-center border-r-[1.5px] border-black hover:bg-gray-50 transition-colors">
-              <RiClaudeFill className="text-2xl sm:text-3xl text-black" />
+            <div className="w-[42px] h-[42px] sm:w-16 sm:h-14 md:w-20 md:h-[60px] flex items-center justify-center border-r-[1.5px] border-black hover:bg-gray-50 transition-colors">
+              <RiClaudeFill className="text-xl sm:text-2xl md:text-3xl text-black" />
             </div>
-            <div className="w-16 h-14 sm:w-20 sm:h-15 flex items-center justify-center border-r-[1.5px] border-black hover:bg-gray-50 transition-colors">
-              <TbBrandAdobePhotoshop className="text-2xl sm:text-3xl text-black" />
+            <div className="w-[42px] h-[42px] sm:w-16 sm:h-14 md:w-20 md:h-[60px] flex items-center justify-center border-r-[1.5px] border-black hover:bg-gray-50 transition-colors">
+              <TbBrandAdobePhotoshop className="text-xl sm:text-2xl md:text-3xl text-black" />
             </div>
-            <div className="w-16 h-14 sm:w-20 sm:h-15 flex items-center justify-center  border-r-[1.5px] border-black hover:bg-gray-50 transition-colors">
-              <SiLottiefiles className="text-2xl sm:text-3xl text-black" />
+            <div className="w-[42px] h-[42px] sm:w-16 sm:h-14 md:w-20 md:h-[60px] flex items-center justify-center border-r-[1.5px] border-black hover:bg-gray-50 transition-colors">
+              <SiLottiefiles className="text-xl sm:text-2xl md:text-3xl text-black" />
             </div>
-            <div className="w-16 h-14 sm:w-20 sm:h-15 flex items-center justify-center hover:bg-gray-50 transition-colors">
-              <RiGeminiFill className="text-2xl sm:text-3xl text-black" />
+            <div className="w-[42px] h-[42px] sm:w-16 sm:h-14 md:w-20 md:h-[60px] flex items-center justify-center hover:bg-gray-50 transition-colors">
+              <RiGeminiFill className="text-xl sm:text-2xl md:text-3xl text-black" />
             </div>
           </div>
         </div>

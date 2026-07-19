@@ -57,7 +57,8 @@ export default function FeaturedWorkSection() {
 
                 {/* Button */}
                 <a
-                  href=""
+                target="_blank"
+                  href="https://www.behance.net/gallery/252563749/Coachify-E-Learning-Platform"
                   className="group flex items-center gap-2 bg-black text-white px-4 py-1.5 font-semibold text-lg hover:bg-gray-800 transition-colors z-10 relative rounded-none"
                 >
                   View Project

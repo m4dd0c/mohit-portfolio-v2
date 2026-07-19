@@ -56,22 +56,22 @@ export default function FooterSection() {
             </h2>
           </div>
 
-          <button className="flex items-center gap-2 bg-[#99D6FF] text-black px-8 font-semibold py-4 text-lg shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1 hover:translate-x-1 hover:shadow-none transition-all w-full lg:w-auto justify-center duration-500">
+          <a href="mailto:mohitjangid1377@gmail.com" className="flex items-center gap-2 bg-[#99D6FF] text-black px-8 font-semibold py-4 text-lg shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1 hover:translate-x-1 hover:shadow-none transition-all w-full lg:w-auto justify-center duration-500">
             Connect With me
             <FiArrowUpRight className="text-2xl" strokeWidth={3} />
-          </button>
+          </a>
         </div>
 
         {/* Footer Bottom Links */}
         <div className="mt-7 flex flex-col gap-6 w-full z-10 relative pb-2">
           {/* Centered Email */}
           <div className="flex justify-center w-full">
-            <div className="flex items-center gap-2 text-black hover:opacity-80 transition-opacity cursor-pointer">
+            <a href="mailto:mohitjangid1377@gmail.com" className="flex items-center gap-2 text-black hover:opacity-80 transition-opacity cursor-pointer">
                 <FaLinkedin className="text-xl" />
               <span className="font-medium text-[16px]">
                 Mohitjangid1377@gmail.com
               </span>
-            </div>
+            </a>
           </div>
 
           {/* Left aligned text */}
