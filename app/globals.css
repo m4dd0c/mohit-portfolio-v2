@@ -23,3 +23,13 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
 }
+
+@keyframes starFloatRotate {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-40px) rotate(180deg); }
+  100% { transform: translateY(0) rotate(360deg); }
+}
+
+.animate-star {
+  animation: starFloatRotate 4s ease-in-out infinite;
+}
